@@ -8,11 +8,14 @@
 
 ## Первая установка
 
+Перед созданием окружения проверьте `python --version`: команда должна запускать Python 3.14, на котором проверен проект. При установке Python добавьте его в PATH. Если команда запускает другую версию, укажите полный путь к нужному `python.exe`. Само расположение папки установки значения не имеет.
+
 Из общей папки с репозиториями:
 
 ```powershell
 cd backend
-& "$env:LOCALAPPDATA\Programs\Python\Python314\python.exe" -m venv .venv
+python --version
+python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 
 $pgPassword = Read-Host "Пароль PostgreSQL" -AsSecureString
@@ -25,7 +28,7 @@ Remove-Variable pgPassword
 .\.venv\Scripts\python.exe manage.py runserver
 ```
 
-Если `.venv` на Python 3.14 уже создано, пропустите создание окружения. Если база существует, пропустите `createdb`. При другой папке установки Python или PostgreSQL измените путь к программе.
+Если подходящее `.venv` уже создано, пропустите создание окружения. Если база существует, пропустите `createdb`. При другой папке установки PostgreSQL измените путь к его программе.
 
 `migrate` создаёт таблицы. `seed_catalog` читает `backend/core/fixtures/components.json` и добавляет 7 категорий и 21 комплектующее; повторный запуск не создаёт дубликаты и не перезаписывает записи.
 
